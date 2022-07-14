@@ -21,7 +21,12 @@ app.get("/lyrics", async (req, res) => {
     const $ = cheerio.load(body);
     let lyric_container = $("div.lyr_data > ._inner > p");
     console.log(lyric_container.text());
-    res.send(lyric_container.text());
+    res.send(
+      lyric_container
+        .text()
+        .split("\n")
+        .filter((line) => line.trim())
+    );
   });
 });
 
